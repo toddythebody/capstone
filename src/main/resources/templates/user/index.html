@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head th:replace="fragments :: head"></head>
+    <body>
+
+        <h1 th:text="${title}"></h1>
+
+        <p th:text="'Welcome to index, ' + ${name}"></p>
+
+        <a href="/user/logout" th:text="Logout"></a>
+    </body>
+</html>

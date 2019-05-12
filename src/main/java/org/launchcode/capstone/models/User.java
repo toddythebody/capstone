@@ -16,11 +16,12 @@ public class User {
     @GeneratedValue
     private int id;
     @NotNull
-    @Pattern(regexp = "^(?=[\\S]{5,30}$)", message = "No spaces/5-30 characters")
+    @Pattern(regexp = "^[\\S]{5,30}$", message = "No spaces/5-30 characters")
     private String name;
     @Email
     private String email;
-    @Pattern(regexp = "^(?=[\\S]{5,30}$)", message = "No spaces/5-30 characters")
+    @NotNull
+    @Pattern(regexp = "^[\\S]{5,}$", message = "No spaces/5-30 characters")
     private String password;
 
     public User() { }
