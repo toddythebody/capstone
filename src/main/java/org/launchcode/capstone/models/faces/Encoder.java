@@ -11,8 +11,8 @@ public class Encoder {
         KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
         SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
         SecretKey key = factory.generateSecret(spec);
-        Byte hash = new Byte(String.valueOf(key));
-        return String.valueOf(key);
+        String hash = String.valueOf(key);
+        return hash.substring(38);
     }
 
     private static byte[] makeSalt(String name) {

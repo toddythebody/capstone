@@ -33,6 +33,9 @@ public class UserController {
 
     @RequestMapping(value = "")
     public String index(Model model) {
+        if (session.getAttribute("user") == "null") {
+            return "redirect:/user/login";
+        }
         User user = (User) session.getAttribute("user");
         model.addAttribute("name", user.getName());
         model.addAttribute("title", "Hello World");
@@ -110,7 +113,7 @@ public class UserController {
 
     @RequestMapping(value = "logout")
     public String logout() {
-        session.setAttribute("user", null);
+        session.setAttribute("user", "null");
         session = request.getSession(false);
         return "redirect:/user/login";
     }
