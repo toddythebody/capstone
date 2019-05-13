@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 @Controller
@@ -32,9 +31,6 @@ public class UserController {
 
     @Autowired
     private HttpServletResponse response;
-
-    @Autowired
-    private HttpSession session;
 
     public Cookie cookie;
 
@@ -70,8 +66,6 @@ public class UserController {
         for (User user1 : userDao.findAll()) {
             if (user1.getName().equals(user.getName())) {
                 if (Encoder.match(user.getName(), user.getPassword(), user1.getPassword())) {
-                    session = request.getSession(true);
-                    session.setAttribute("user", user1);
                     cookie = new Cookie("name", user1.getName());
                     cookie.setMaxAge(60*60*24*30);
                     response.addCookie(cookie);
@@ -122,8 +116,9 @@ public class UserController {
         }
         user.setPassword(Encoder.encode(user.getName(), user.getPassword()));
         userDao.save(user);
-        session = request.getSession(true);
-        session.setAttribute("user", user);
+        cookie = new Cookie("name", user.getName());
+        cookie.setMaxAge(60*60*24*30);
+        response.addCookie(cookie);
         return "redirect:";
     }
 
@@ -140,7 +135,6 @@ public class UserController {
         cookie = new Cookie("name", "");
         cookie.setMaxAge(0);
         response.addCookie(cookie);
-        request.getSession().invalidate();
         return "redirect:/user/login";
     }
 
