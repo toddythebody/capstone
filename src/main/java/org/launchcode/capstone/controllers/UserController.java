@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -36,13 +37,7 @@ public class UserController {
 
     @RequestMapping(value = "")
     public String index(Model model) {
-        Cookie[] cookies = request.getCookies();
-        String name = "";
-        for (Cookie c : cookies) {
-            if (c.getName().equals("name")) {
-                name = c.getValue();
-            }
-        }
+        String name = WebUtils.getCookie(request, "name").getValue();
         model.addAttribute("title", "Hello World");
         model.addAttribute("name", name);
         return "user/index";
