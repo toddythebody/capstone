@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -29,17 +31,28 @@ public class UserController {
     private HttpServletRequest request;
 
     @Autowired
+    private HttpServletResponse response;
+
+    @Autowired
     private HttpSession session;
+
+    public Cookie cookie;
 
     @RequestMapping(value = "")
     public String index(Model model) {
-        if (session.getAttribute("user") == "null") {
-            return "redirect:/user/login";
+        Cookie[] cookies = request.getCookies();
+        for (Cookie c : cookies) {
+            if (c.getName().equals("name")) {
+                if (c.getValue() == null) {
+                    return "redirect:/user/login";
+                } else {
+                    model.addAttribute("title", "Hello World");
+                    model.addAttribute("name", c.getValue());
+                    return "user/index";
+                }
+            }
         }
-        User user = (User) session.getAttribute("user");
-        model.addAttribute("name", user.getName());
-        model.addAttribute("title", "Hello World");
-        return "user/index";
+        return "redirect:/user/login";
     }
 
     @RequestMapping(value = "login", method = RequestMethod.GET)
@@ -59,6 +72,9 @@ public class UserController {
                 if (Encoder.match(user.getName(), user.getPassword(), user1.getPassword())) {
                     session = request.getSession(true);
                     session.setAttribute("user", user1);
+                    cookie = new Cookie("name", user1.getName());
+                    cookie.setMaxAge(60*60*24*30);
+                    response.addCookie(cookie);
                     return "redirect:";
                 } else {
                     model.addAttribute("title", "Login");
@@ -113,8 +129,18 @@ public class UserController {
 
     @RequestMapping(value = "logout")
     public String logout() {
-        session.setAttribute("user", "null");
-        session = request.getSession(false);
+        Cookie[] cookies = request.getCookies();
+        for (Cookie c : cookies) {
+            if (c.getName().equals("name")) {
+                if (c.getValue() == null) {
+                    return "redirect:/user/login";
+                }
+            }
+        }
+        cookie = new Cookie("name", "");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+        request.getSession().invalidate();
         return "redirect:/user/login";
     }
 
