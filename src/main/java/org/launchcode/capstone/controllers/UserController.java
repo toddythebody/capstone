@@ -2,7 +2,7 @@ package org.launchcode.capstone.controllers;
 
 import org.launchcode.capstone.models.User;
 import org.launchcode.capstone.models.data.UserDao;
-import org.launchcode.capstone.models.faces.Encoder;
+import org.launchcode.capstone.models.security.Encoder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,18 +37,15 @@ public class UserController {
     @RequestMapping(value = "")
     public String index(Model model) {
         Cookie[] cookies = request.getCookies();
+        String name = "";
         for (Cookie c : cookies) {
             if (c.getName().equals("name")) {
-                if (c.getValue() == null) {
-                    return "redirect:/user/login";
-                } else {
-                    model.addAttribute("title", "Hello World");
-                    model.addAttribute("name", c.getValue());
-                    return "user/index";
-                }
+                name = c.getValue();
             }
         }
-        return "redirect:/user/login";
+        model.addAttribute("title", "Hello World");
+        model.addAttribute("name", name);
+        return "user/index";
     }
 
     @RequestMapping(value = "login", method = RequestMethod.GET)

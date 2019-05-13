@@ -1,4 +1,4 @@
-package org.launchcode.capstone.models.faces;
+package org.launchcode.capstone.models.security;
 
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
