@@ -33,7 +33,7 @@ public class UserController {
     @Autowired
     private HttpServletResponse response;
 
-    public Cookie cookie;
+    private Cookie cookie;
 
     @RequestMapping(value = "")
     public String index(Model model) {
