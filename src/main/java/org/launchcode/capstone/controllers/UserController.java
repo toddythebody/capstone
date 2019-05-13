@@ -56,7 +56,7 @@ public class UserController {
             return "user/login";
         }
         for (User user1 : userDao.findAll()) {
-            if (user1.getName().equals(user.getName())) {
+            if (user1.getName().toLowerCase().equals(user.getName().toLowerCase())) {
                 if (Encoder.match(user.getName(), user.getPassword(), user1.getPassword())) {
                     cookie = new Cookie("name", user1.getName());
                     cookie.setMaxAge(60*60*24*30);
@@ -88,13 +88,13 @@ public class UserController {
             return "user/register";
         }
         for (User user1 : userDao.findAll()) {
-            if (user1.getName().equals(user.getName())) {
+            if (user1.getName().toLowerCase().equals(user.getName().toLowerCase())) {
                 model.addAttribute("title", "Register");
                 model.addAttribute("error", "User Exists");
                 return "user/register";
             }
             if (!user.getEmail().isEmpty() && !user1.getEmail().isEmpty()) {
-                if (user.getEmail().equals(user1.getEmail())) {
+                if (user.getEmail().toLowerCase().equals(user1.getEmail().toLowerCase())) {
                     model.addAttribute("title", "Register");
                     model.addAttribute("error", "Email Exists");
                     return "user/register";
