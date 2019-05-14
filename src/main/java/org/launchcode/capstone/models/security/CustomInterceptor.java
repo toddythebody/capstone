@@ -6,15 +6,18 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Arrays;
 
 @Component
 public class CustomInterceptor extends HandlerInterceptorAdapter {
+
+    private String[] paths = {"/user/login", "/user/register"};
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Cookie[] cookies = request.getCookies();
         String path = request.getRequestURI();
-        if (!path.equals("/user/login") && !path.equals("/user/register")) {
+        if (Arrays.stream(paths).noneMatch(path::equals)) {
             for (Cookie c : cookies) {
                 if (c.getName().equals("name")) {
                     if (c.getValue() == null) {
