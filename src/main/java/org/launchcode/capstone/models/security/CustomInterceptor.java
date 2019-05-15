@@ -2,6 +2,7 @@ package org.launchcode.capstone.models.security;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -19,20 +20,13 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
         Cookie[] cookies = request.getCookies();
         String path = request.getRequestURI();
         if (Arrays.stream(paths).noneMatch(path::equals)) {
-            for (Cookie c : cookies) {
-                if (c.getName().equals("name")) {
-                    if (c.getValue() == null) {
-                        response.sendRedirect("/");
-                        return false;
-                    } else {
-                        return true;
-                    }
-                }
+            if (WebUtils.getCookie(request, "name") == null) {
+                response.sendRedirect("/");
+                return false;
+            } else {
+                return true;
             }
-            response.sendRedirect("/");
-            return false;
         }
         return true;
     }
-
 }

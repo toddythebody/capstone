@@ -119,14 +119,6 @@ public class UserController {
 
     @RequestMapping(value = "logout")
     public String logout() {
-        Cookie[] cookies = request.getCookies();
-        for (Cookie c : cookies) {
-            if (c.getName().equals("name")) {
-                if (c.getValue() == null) {
-                    return "redirect:";
-                }
-            }
-        }
         cookie = new Cookie("name", "");
         cookie.setMaxAge(0);
         cookie.setPath("/");
