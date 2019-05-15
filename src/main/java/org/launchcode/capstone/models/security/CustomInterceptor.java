@@ -11,7 +11,8 @@ import java.util.Arrays;
 @Component
 public class CustomInterceptor extends HandlerInterceptorAdapter {
 
-    private String[] paths = {"/user/login", "/user/register"};
+
+    private String[] paths = {"/user/login", "/user/register", "/"};
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -21,14 +22,14 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
             for (Cookie c : cookies) {
                 if (c.getName().equals("name")) {
                     if (c.getValue() == null) {
-                        response.sendRedirect("/user/login");
+                        response.sendRedirect("/");
                         return false;
                     } else {
                         return true;
                     }
                 }
             }
-            response.sendRedirect("/user/login");
+            response.sendRedirect("/");
             return false;
         }
         return true;

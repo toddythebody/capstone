@@ -33,6 +33,7 @@ public class UserController {
     @Autowired
     private HttpServletResponse response;
 
+
     private Cookie cookie;
 
     @RequestMapping(value = "")
@@ -60,6 +61,7 @@ public class UserController {
                 if (Encoder.match(user.getName(), user.getPassword(), user1.getPassword())) {
                     cookie = new Cookie("name", user1.getName());
                     cookie.setMaxAge(60*60*24*30);
+                    cookie.setPath("/");
                     response.addCookie(cookie);
                     return "redirect:";
                 } else {
@@ -110,6 +112,7 @@ public class UserController {
         userDao.save(user);
         cookie = new Cookie("name", user.getName());
         cookie.setMaxAge(60*60*24*30);
+        cookie.setPath("/");
         response.addCookie(cookie);
         return "redirect:";
     }
@@ -120,14 +123,15 @@ public class UserController {
         for (Cookie c : cookies) {
             if (c.getName().equals("name")) {
                 if (c.getValue() == null) {
-                    return "redirect:/user/login";
+                    return "redirect:";
                 }
             }
         }
         cookie = new Cookie("name", "");
         cookie.setMaxAge(0);
+        cookie.setPath("/");
         response.addCookie(cookie);
-        return "redirect:/user/login";
+        return "redirect:";
     }
 
 }
