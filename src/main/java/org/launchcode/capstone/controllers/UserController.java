@@ -33,7 +33,6 @@ public class UserController {
     @Autowired
     private HttpServletResponse response;
 
-
     private Cookie cookie;
 
     @RequestMapping(value = "")

@@ -12,7 +12,6 @@ import java.util.Arrays;
 @Component
 public class CustomInterceptor extends HandlerInterceptorAdapter {
 
-
     private String[] paths = {"/user/login", "/user/register", "/"};
 
     @Override
