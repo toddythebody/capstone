@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+    <head th:replace="fragments :: head"></head>
+    <body>
+
+        <h1 th:text="${title}"></h1>
+
+        <form method="post" th:object="${item}">
+            <div><label th:for="*{name}">Item: <input th:field="*{name}" /></label></div>
+            <div th:errors="*{name}"></div>
+            <div><label th:for="*{description}">Description: <input th:field="*{description}" /></label></div>
+            <div th:errors="*{description}"></div>
+            <input type="submit" value="Add Item" />
+        </form>
+
+    </body>
+</html>

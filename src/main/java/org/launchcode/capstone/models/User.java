@@ -1,12 +1,12 @@
 package org.launchcode.capstone.models;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -23,6 +23,9 @@ public class User {
     @NotNull
     @Pattern(regexp = "^[\\S]{5,}$", message = "No spaces/5-30 characters")
     private String password;
+    @OneToMany
+    @JoinColumn(name = "user_id")
+    private List<Item> items = new ArrayList<>();
 
     public User() { }
 
@@ -58,5 +61,9 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Item> getItems() {
+        return items;
     }
 }

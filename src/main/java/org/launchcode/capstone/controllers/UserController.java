@@ -38,8 +38,10 @@ public class UserController {
     @RequestMapping(value = "")
     public String index(Model model) {
         String name = WebUtils.getCookie(request, "name").getValue();
+        User user = userDao.findByName(name);
         model.addAttribute("title", "Hello World");
         model.addAttribute("name", name);
+        model.addAttribute(user);
         return "user/index";
     }
 
