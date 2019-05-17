@@ -8,12 +8,12 @@
         <p th:text="'Welcome to your profile, ' + ${name} + '!'"></p>
 
         <div th:object="${user}">
-            <ul>
-                <div th:each="item : *{items}">
-                    <li th:text="${item.name}"></li>
-                    <p th:text="${item.description}"></p>
-                </div>
-            </ul>
+            <table>
+                <tr th:each="item : *{items}">
+                    <td class="itemName" th:text="${item.name}"></td>
+                    <td th:text="${item.description}"></td>
+                </tr>
+            </table>
         </div>
 
         <a href="/user/logout">Logout</a> |
