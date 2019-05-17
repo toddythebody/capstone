@@ -1,9 +1,6 @@
 package org.launchcode.capstone.models.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.WebUtils;
 
@@ -21,6 +18,11 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         Cookie[] cookies = request.getCookies();
         String path = request.getRequestURI();
+        String pathCss = request.getServletPath();
+        System.out.println(pathCss);
+        if (pathCss.contains("css")) {
+            return true;
+        }
         if (Arrays.stream(paths).noneMatch(path::equals)) {
             if (WebUtils.getCookie(request, "name") == null) {
                 response.sendRedirect("/");
