@@ -10,7 +10,9 @@
         <div th:object="${user}">
             <table>
                 <tr th:each="item : *{items}">
-                    <td class="itemName" th:text="${item.name}"></td>
+                    <td>
+                        <a th:href="'/item/edit/' + ${item.id}" th:text="${item.name}" class="itemName"></a>
+                    </td>
                     <td th:text="${item.description}"></td>
                 </tr>
             </table>

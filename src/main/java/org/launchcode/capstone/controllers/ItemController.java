@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.util.WebUtils;
@@ -52,14 +53,31 @@ public class ItemController {
         return "redirect:/user/";
     }
 
-    @RequestMapping(value = "edit", method = RequestMethod.GET)
-    public String editDisplay(Model model) {
+    @RequestMapping(value = "edit/{itemId}", method = RequestMethod.GET)
+    public String editDisplay(Model model, @PathVariable int itemId) {
+        Item item = itemDao.findById(itemId).get();
+        model.addAttribute("title", item.getName());
+        model.addAttribute(item);
         return "item/edit";
     }
 
-    @RequestMapping(value = "edit", method = RequestMethod.POST)
-    public String editProcess(Model model) {
-        return "item/edit";
+    @RequestMapping(value = "edit/{itemId}", method = RequestMethod.POST)
+    public String editProcess(Model model, @PathVariable int itemId, @ModelAttribute @Valid Item item, Errors errors) {
+        if (errors.hasErrors()) {
+            model.addAttribute("title", item.getName());
+            return "item/edit";
+        }
+        Item newItem = itemDao.findById(itemId).get();
+        newItem.setName(item.getName());
+        newItem.setDescription(item.getDescription());
+        itemDao.save(newItem);
+        return "redirect:/user/";
+    }
+
+    @RequestMapping(value = "remove/{itemId}")
+    public String remove(@PathVariable int itemId) {
+        itemDao.delete(itemDao.findById(itemId).get());
+        return "redirect:/user/";
     }
 
 }
