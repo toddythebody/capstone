@@ -64,7 +64,7 @@ public class ItemController {
     @RequestMapping(value = "edit/{itemId}", method = RequestMethod.POST)
     public String editProcess(Model model, @PathVariable int itemId, @ModelAttribute @Valid Item item, Errors errors) {
         if (errors.hasErrors()) {
-            model.addAttribute("title", item.getName());
+            model.addAttribute("title", itemDao.findById(itemId).get().getName());
             return "item/edit";
         }
         Item newItem = itemDao.findById(itemId).get();

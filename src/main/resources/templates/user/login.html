@@ -13,14 +13,14 @@
             <table>
 
                 <tr>
-                    <td><label th:for="*{name}">Username:</label></td>
-                    <td><input th:field="*{name}" /></td>
+                    <td><label for="name">Username:</label></td>
+                    <td><input id="name" th:field="*{name}" /></td>
                     <td class="errors" th:errors="*{name}"></td>
                 </tr>
 
                 <tr>
-                    <td><label th:for="*{password}">Password:</label></td>
-                    <td><input type="password" th:field="*{password}" /></td>
+                    <td><label for="password">Password:</label></td>
+                    <td><input id="password" type="password" th:field="*{password}" /></td>
                     <td class="errors" th:errors="*{password}"></td>
                 </tr>
 
