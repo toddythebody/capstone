@@ -106,7 +106,7 @@ public class UserController {
         }
         if (!user.getPassword().equals(verify)) {
             model.addAttribute("title", "Register");
-            model.addAttribute("verify", "Password does not match");
+            model.addAttribute("error", "Password does not match");
             return "user/register";
         }
         user.setPassword(Encoder.encode(user.getName(), user.getPassword()));

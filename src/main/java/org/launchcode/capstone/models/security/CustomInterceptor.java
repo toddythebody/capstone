@@ -19,7 +19,6 @@ public class CustomInterceptor extends HandlerInterceptorAdapter {
         Cookie[] cookies = request.getCookies();
         String path = request.getRequestURI();
         String pathCss = request.getServletPath();
-        System.out.println(pathCss);
         if (pathCss.contains("css")) {
             return true;
         }

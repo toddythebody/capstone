@@ -6,11 +6,29 @@
         <h1 th:text="${title}"></h1>
 
         <form method="post" th:object="${item}">
-            <div><label th:for="*{name}">Item: <input th:field="*{name}" /></label></div>
-            <div th:errors="*{name}"></div>
-            <div><label th:for="*{description}">Description: <input th:field="*{description}" /></label></div>
-            <div th:errors="*{description}"></div>
-            <input type="submit" value="Add Item" />
+
+            <table>
+                <tr>
+
+                    <td><label th:for="*{name}">Item:</label></td>
+                    <td><input th:field="*{name}" /></td>
+                    <td class="errors" th:errors="*{name}"></td>
+
+                </tr>
+
+                <tr>
+
+                    <td><label th:for="*{description}">Description:</label></td>
+                    <td><input th:field="*{description}" /></td>
+                    <td class="errors" th:errors="*{description}"></td>
+
+                </tr>
+
+            </table>
+
+            <input type="submit" value="Add Item" /> |
+            <a href="/user">Cancel</a>
+
         </form>
 
     </body>

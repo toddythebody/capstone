@@ -6,18 +6,25 @@
 
         <h1 th:text="${title}"></h1>
 
-        <div th:text="${error}"></div>
+        <span class="error" th:if="${error} != null" th:text="${error}"></span>
 
         <form method="post" th:object="${user}">
 
-            <div><label th:for="*{name}">Username:
-                <input th:field="*{name}" /></label></div>
-            <div th:errors="*{name}"></div>
+            <table>
 
-            <div><label th:for="*{password}">Password:
-                <input type="password" th:field="*{password}" /></label></div>
-            <div th:errors="*{password}"></div>
+                <tr>
+                    <td><label th:for="*{name}">Username:</label></td>
+                    <td><input th:field="*{name}" /></td>
+                    <td class="errors" th:errors="*{name}"></td>
+                </tr>
 
+                <tr>
+                    <td><label th:for="*{password}">Password:</label></td>
+                    <td><input type="password" th:field="*{password}" /></td>
+                    <td class="errors" th:errors="*{password}"></td>
+                </tr>
+
+            </table>
             <input type="submit" value="Login" />
 
         </form>

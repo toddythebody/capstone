@@ -15,3 +15,17 @@ td {
 .itemName {
     font-weight: bold;
 }
+
+.errors {
+    background-color: lightpink;
+    color: darkred;
+}
+
+.error {
+    display: inline-block;
+    border: 1px solid darkred;
+    color: darkred;
+    background-color: lightpink;
+    padding: 5px;
+    margin-bottom: 2px;
+}
