@@ -75,7 +75,7 @@ public class UserController {
     public String friends(Model model) {
         User user = userDao.findByName(WebUtils.getCookie(request, "name").getValue());
         List<User> friends = user.getFriends();
-        model.addAttribute("title", "Friends");
+        model.addAttribute("title", "Following");
         model.addAttribute(user);
         return "user/friends";
     }
