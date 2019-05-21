@@ -5,8 +5,6 @@
 
         <h1 th:text="${title}"></h1>
 
-        <p th:text="'Welcome to your profile, ' + ${name} + '!'"></p>
-
         <div th:object="${user}">
             <table>
                 <tr th:each="item : *{items}">
