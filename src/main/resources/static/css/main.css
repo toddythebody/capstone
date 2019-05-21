@@ -34,3 +34,11 @@ td {
     padding: 5px;
     margin-bottom: 2px;
 }
+
+.red {
+    background-color: red;
+}
+
+.green {
+    background-color: green;
+}

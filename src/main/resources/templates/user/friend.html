@@ -10,6 +10,16 @@
                 <tr th:each="item : *{items}">
                     <td th:text="${item.name}"></td>
                     <td th:text="${item.description}"></td>
+                    <td th:if="${item.purchased} == false">
+                        <a th:href="'purchase/' + ${item.id}">
+                            <input class="red" type="button" />
+                        </a>
+                    </td>
+                    <td th:if="${item.purchased} == true">
+                        <a th:href="'purchase/' + ${item.id}">
+                            <input class="green" type="button" />
+                        </a>
+                    </td>
                 </tr>
             </table>
         </div>

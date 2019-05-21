@@ -1,6 +1,8 @@
 package org.launchcode.capstone.controllers;
 
+import org.launchcode.capstone.models.Item;
 import org.launchcode.capstone.models.User;
+import org.launchcode.capstone.models.data.ItemDao;
 import org.launchcode.capstone.models.data.UserDao;
 import org.launchcode.capstone.models.security.Encoder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +25,9 @@ public class UserController {
 
     @Autowired
     private UserDao userDao;
+
+    @Autowired
+    private ItemDao itemDao;
 
     private Encoder encoder;
 
@@ -51,6 +56,19 @@ public class UserController {
         model.addAttribute("name", name);
         model.addAttribute(user);
         return "user/friend";
+    }
+
+    @RequestMapping(value = "purchase/{itemId}")
+    public String profile(@PathVariable int itemId) {
+        Item item = itemDao.findById(itemId).get();
+        User user = item.getUser();
+        if (item.isPurchased()) {
+            item.setPurchased(false);
+        } else {
+            item.setPurchased(true);
+        }
+        itemDao.save(item);
+        return "redirect:/user/" + user.getName();
     }
 
     @RequestMapping(value = "friends")
