@@ -64,6 +64,9 @@ public class UserController {
 
     @RequestMapping(value = "search")
     public String search(Model model, @RequestParam String search) {
+        if (search.equals("")) {
+            return "redirect:/user/friends";
+        }
         List<User> userList = new ArrayList<>();
         User logged_user = userDao.findByName(WebUtils.getCookie(request, "name").getValue());
         for (User user : userDao.findAll()) {
