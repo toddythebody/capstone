@@ -26,6 +26,10 @@ public class User {
     @OneToMany
     @JoinColumn(name = "user_id")
     private List<Item> items = new ArrayList<>();
+    @ManyToMany
+    private List<User> friends = new ArrayList<>();
+    @ManyToMany(mappedBy = "friends")
+    private List<User> friendOf = new ArrayList<>();
 
     public User() { }
 
@@ -65,5 +69,17 @@ public class User {
 
     public List<Item> getItems() {
         return items;
+    }
+
+    public List<User> getFriends() {
+        return friends;
+    }
+
+    public List<User> getFriendOf() {
+        return friendOf;
+    }
+
+    public void addFriend(User friend) {
+        friends.add(friend);
     }
 }

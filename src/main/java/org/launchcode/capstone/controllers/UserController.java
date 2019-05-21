@@ -7,16 +7,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.WebUtils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @RequestMapping(value = "user")
@@ -43,6 +42,46 @@ public class UserController {
         model.addAttribute("name", name);
         model.addAttribute(user);
         return "user/index";
+    }
+
+    @RequestMapping(value = "/{name}")
+    public String profile(Model model, @PathVariable String name) {
+        User user = userDao.findByName(name);
+        model.addAttribute("title", name + "'s profile");
+        model.addAttribute("name", name);
+        model.addAttribute(user);
+        return "user/friend";
+    }
+
+    @RequestMapping(value = "friends")
+    public String friends(Model model) {
+        User user = userDao.findByName(WebUtils.getCookie(request, "name").getValue());
+        List<User> friends = user.getFriends();
+        model.addAttribute("title", "Friends");
+        model.addAttribute(user);
+        return "user/friends";
+    }
+
+    @RequestMapping(value = "search")
+    public String search(Model model, @RequestParam String search) {
+        List<User> userList = new ArrayList<>();
+        for (User user : userDao.findAll()) {
+            if (user.getName().contains(search)) {
+                userList.add(user);
+            }
+        }
+        model.addAttribute(userList);
+        model.addAttribute("title", "Search: " + search);
+        return "user/search";
+    }
+
+    @RequestMapping(value = "add/{name}")
+    public String addFriend(@PathVariable String name) {
+        User user = userDao.findByName(WebUtils.getCookie(request, "name").getValue());
+        User friend = userDao.findByName(name);
+        user.addFriend(friend);
+        userDao.save(user);
+        return "redirect:/user/friends";
     }
 
     @RequestMapping(value = "login", method = RequestMethod.GET)

@@ -10,16 +10,13 @@
         <div th:object="${user}">
             <table>
                 <tr th:each="item : *{items}">
-                    <td>
-                        <a th:href="'/item/edit/' + ${item.id}" th:text="${item.name}" class="itemName"></a>
-                    </td>
+                    <td th:text="${item.name}"></td>
                     <td th:text="${item.description}"></td>
                 </tr>
             </table>
         </div>
+        <a th:href="'add/' + ${user.name}">Add to friends list</a>
 
-        <a href="/user/logout">Logout</a> |
-        <a href="/item/add">Add Item</a> |
-        <a href="/user/friends">Friends</a>
+
     </body>
 </html>
