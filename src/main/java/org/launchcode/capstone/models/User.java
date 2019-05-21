@@ -82,4 +82,8 @@ public class User {
     public void addFriend(User friend) {
         friends.add(friend);
     }
+
+    public void removeFriend(User friend) {
+        friends.remove(friend);
+    }
 }

@@ -110,6 +110,17 @@ public class UserController {
         return "redirect:/user/friends";
     }
 
+    @RequestMapping(value = "remove/{name}")
+    public String removeFriend(@PathVariable String name) {
+        User user = userDao.findByName(WebUtils.getCookie(request, "name").getValue());
+        User friend = userDao.findByName(name);
+        if (!user.equals(friend) && user.getFriends().contains(friend)) {
+            user.removeFriend(friend);
+            userDao.save(user);
+        }
+        return "redirect:/user/friends";
+    }
+
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public String loginDisplay(Model model, @ModelAttribute User user) {
         model.addAttribute("title", "Login");
