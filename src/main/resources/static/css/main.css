@@ -42,3 +42,11 @@ td {
 .green {
     background-color: green;
 }
+
+.peekRed:active {
+    background-color: red;
+}
+
+.peekGreen:active {
+    background-color: green;
+}

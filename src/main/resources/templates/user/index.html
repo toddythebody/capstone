@@ -14,6 +14,12 @@
                         <a th:href="'/item/edit/' + ${item.id}" th:text="${item.name}" class="itemName"></a>
                     </td>
                     <td th:text="${item.description}"></td>
+                    <td th:if="${item.purchased} == false">
+                        <input class="peekRed" type="button" />
+                    </td>
+                    <td th:if="${item.purchased} == true">
+                        <input class="peekGreen" type="button" />
+                    </td>
                 </tr>
             </table>
         </div>

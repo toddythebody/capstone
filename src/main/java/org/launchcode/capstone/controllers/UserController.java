@@ -59,7 +59,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "purchase/{itemId}")
-    public String profile(@PathVariable int itemId) {
+    public String purchase(@PathVariable int itemId) {
         Item item = itemDao.findById(itemId).get();
         User user = item.getUser();
         if (item.isPurchased()) {
@@ -74,7 +74,6 @@ public class UserController {
     @RequestMapping(value = "friends")
     public String friends(Model model) {
         User user = userDao.findByName(WebUtils.getCookie(request, "name").getValue());
-        List<User> friends = user.getFriends();
         model.addAttribute("title", "Following");
         model.addAttribute(user);
         return "user/friends";
