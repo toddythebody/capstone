@@ -28,7 +28,7 @@ public class MainController {
         if (WebUtils.getCookie(request, "name") != null) {
             return "redirect:/user";
         }
-        model.addAttribute("title", "The Registry");
+        model.addAttribute("title", "iWants");
         return "main/index";
     }
 
