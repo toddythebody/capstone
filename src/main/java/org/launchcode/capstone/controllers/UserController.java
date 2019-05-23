@@ -154,7 +154,7 @@ public class UserController {
 
     @RequestMapping(value = "register", method = RequestMethod.GET)
     public String registerDisplay(Model model, @ModelAttribute User user) {
-        model.addAttribute("title", "Register");
+        model.addAttribute("title", "iWants");
         return "user/register";
     }
 
@@ -162,25 +162,25 @@ public class UserController {
     public String registerProcess(Model model, @ModelAttribute @Valid User user, Errors errors,
                                   @RequestParam String verify) throws Exception {
         if (errors.hasErrors()) {
-            model.addAttribute("title", "Register");
+            model.addAttribute("title", "iWants");
             return "user/register";
         }
         for (User user1 : userDao.findAll()) {
             if (user1.getName().toLowerCase().equals(user.getName().toLowerCase())) {
-                model.addAttribute("title", "Register");
+                model.addAttribute("title", "iWants");
                 model.addAttribute("error", "User Exists");
                 return "user/register";
             }
             if (!user.getEmail().isEmpty() && !user1.getEmail().isEmpty()) {
                 if (user.getEmail().toLowerCase().equals(user1.getEmail().toLowerCase())) {
-                    model.addAttribute("title", "Register");
+                    model.addAttribute("title", "iWants");
                     model.addAttribute("error", "Email Exists");
                     return "user/register";
                 }
             }
         }
         if (!user.getPassword().equals(verify)) {
-            model.addAttribute("title", "Register");
+            model.addAttribute("title", "iWants");
             model.addAttribute("error", "Password does not match");
             return "user/register";
         }

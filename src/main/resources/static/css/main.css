@@ -51,12 +51,31 @@ a {
     color: black;
 }
 
+.homepage tr {
+    display: inline-block;
+    width: 95%;
+    max-width: 500px;
+    font-size: 25px;
+    padding-top: 50px;
+}
+
+.homepage td {
+    width: 100%;
+}
+
+.homepage input {
+    display: inline-block;
+    width: 250px;
+    height: 30px;
+    font-size:25px;
+    padding-left:2px;
+}
+
 table {
     border: 1px solid black;
 }
 
 td {
-    border: 1px solid black;
     padding: 5px;
 }
 
