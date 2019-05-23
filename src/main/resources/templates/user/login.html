@@ -4,7 +4,9 @@
     </head>
     <body>
 
-        <h1 th:text="${title}"></h1>
+        <div class="pageHeader">
+            <h1 th:text="${title}"></h1>
+        </div>
 
         <span class="error" th:if="${error} != null" th:text="${error}"></span>
 

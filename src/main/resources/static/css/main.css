@@ -1,6 +1,54 @@
+.pageHeader {
+    background-color: #f6f6f6;
+    background-image: url(../img/headBack.png);
+    background-size: 200px;
+    background-position: left;
+    background-repeat: no-repeat;
+    height: 115px;
+    border: 1px solid black;
+}
+
+.pageHeader h1 {
+    position: relative;
+    left: 185px;
+    top: 5px;
+    font-size: 75px;
+    margin: 0;
+}
+
+.homepage {
+    display: block;
+    background-color: #f6f6f6;
+    text-align: center;
+    margin: 200px auto;
+    height: 250px;
+    width: 95%;
+    max-width: 800px;
+    border: 1px solid black;
+}
+
+.homepageChild {
+    display: inline-block;
+    position: relative;
+    background-color: white;
+    height: 50px;
+    width: 40%;
+    border: 1px solid black;
+    margin: 95px 20px;
+}
+
+.homepageChild a {
+    display: inline-block;
+    position: relative;
+    padding-top: 10px;
+    height: 40px;
+    width: 100%;
+    font-size: 25px;
+}
+
 a {
     text-decoration: none;
-    color: blue;
+    color: black;
 }
 
 table {

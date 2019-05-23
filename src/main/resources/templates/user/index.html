@@ -3,7 +3,9 @@
     <head th:replace="fragments :: head"></head>
     <body>
 
-        <h1 th:text="${title}"></h1>
+        <div class="pageHeader">
+            <h1 th:text="${title}"></h1>
+        </div>
 
         <p th:text="'Welcome to your profile, ' + ${name} + '!'"></p>
 

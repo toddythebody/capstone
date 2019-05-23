@@ -43,7 +43,7 @@ public class UserController {
     public String index(Model model) {
         String name = WebUtils.getCookie(request, "name").getValue();
         User user = userDao.findByName(name);
-        model.addAttribute("title", "Hello World");
+        model.addAttribute("title", "iWants");
         model.addAttribute("name", name);
         model.addAttribute(user);
         return "user/index";
@@ -122,14 +122,14 @@ public class UserController {
 
     @RequestMapping(value = "login", method = RequestMethod.GET)
     public String loginDisplay(Model model, @ModelAttribute User user) {
-        model.addAttribute("title", "Login");
+        model.addAttribute("title", "iWants");
         return "user/login";
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String loginProcess(Model model, @ModelAttribute @Valid User user, Errors errors) throws Exception {
         if (errors.hasErrors()) {
-            model.addAttribute("title", "Login");
+            model.addAttribute("title", "iWants");
             return "user/login";
         }
         for (User user1 : userDao.findAll()) {
@@ -141,13 +141,13 @@ public class UserController {
                     response.addCookie(cookie);
                     return "redirect:";
                 } else {
-                    model.addAttribute("title", "Login");
+                    model.addAttribute("title", "iWants");
                     model.addAttribute("error", "Wrong Password");
                     return "user/login";
                 }
             }
         }
-        model.addAttribute("title", "Login");
+        model.addAttribute("title", "iWants");
         model.addAttribute("error", "User doesn't exist");
         return "user/login";
     }
