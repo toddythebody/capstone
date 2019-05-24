@@ -16,11 +16,11 @@
     margin: 0;
 }
 
-.homepage {
+.homepage, .registerTable {
     display: block;
     background-color: #f6f6f6;
     text-align: center;
-    margin: 200px auto;
+    margin: 200px auto 10px auto;
     height: 250px;
     width: 95%;
     max-width: 800px;
@@ -59,11 +59,19 @@ a {
     padding-top: 50px;
 }
 
-.homepage td {
+.registerTable tr {
+    display: inline-block;
+    width: 95%;
+    max-width: 500px;
+    font-size: 25px;
+    padding-top: 8.5px;
+}
+
+.homepage td, .registerTable td {
     width: 100%;
 }
 
-.homepage input {
+.homepage input, .registerTable input {
     display: inline-block;
     width: 250px;
     height: 30px;
@@ -79,6 +87,20 @@ td {
     padding: 5px;
 }
 
+.submitNav {
+    margin: auto;
+    width: 25%;
+    min-width: 250px;
+    text-align: center;
+}
+
+.submitNav input{
+    display: inline-block;
+    margin: auto 10px;
+    height: 50px;
+    width: 150px;
+}
+
 .itemName {
     font-weight: bold;
     color: black;
@@ -88,9 +110,19 @@ td {
     color: dimgrey;
 }
 
+.errorsBlock {
+    position: absolute;
+    left: calc(50% - 125px);
+    top: 260px;
+}
+
 .errors {
     background-color: lightpink;
     color: darkred;
+    width: 250px;
+    font-size: 20px;
+    border: 1px solid darkred;
+    text-align: center;
 }
 
 .error {
