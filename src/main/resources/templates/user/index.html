@@ -7,27 +7,39 @@
             <h1 th:text="${title}"></h1>
         </div>
 
-        <p th:text="'Welcome to your profile, ' + ${name} + '!'"></p>
+        <nav>
+            <a href="/user/logout"><input type="button" value="Logout" /></a> |
+            <a href="/item/add"><input type="button" value="Add Item" /></a> |
+            <a href="/user/friends"><input type="button" value="Following" /></a>
+        </nav>
 
         <div th:object="${user}">
-            <table>
-                <tr th:each="item : *{items}">
-                    <td>
-                        <a th:href="'/item/edit/' + ${item.id}" th:text="${item.name}" class="itemName"></a>
-                    </td>
-                    <td th:text="${item.description}"></td>
-                    <td th:if="${item.purchased} == false">
-                        <input class="peekRed" type="button" />
-                    </td>
-                    <td th:if="${item.purchased} == true">
-                        <input class="peekGreen" type="button" />
-                    </td>
-                </tr>
+
+            <table class="itemList">
+
+                <div th:each="item : *{items}">
+
+                    <tr class="itemListName">
+                        <td>
+                            <a th:href="'/item/edit/' + ${item.id}" th:text="${item.name}" class="itemName"></a>
+                        </td>
+                        <td th:if="${item.purchased} == false">
+                            <input class="peekRed" type="button" value="Peek" />
+                        </td>
+                        <td th:if="${item.purchased} == true">
+                            <input class="peekGreen" type="button" value="Peek" />
+                        </td>
+                    </tr>
+
+                    <tr class="itemListDesc">
+                        <td th:text="${item.description}"></td>
+                    </tr>
+
+                </div>
+
             </table>
+
         </div>
 
-        <a href="/user/logout">Logout</a> |
-        <a href="/item/add">Add Item</a> |
-        <a href="/user/friends">Following</a>
     </body>
 </html>

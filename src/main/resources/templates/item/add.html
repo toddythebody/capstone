@@ -3,32 +3,39 @@
     <head th:replace="fragments :: head"></head>
     <body>
 
-        <h1 th:text="${title}"></h1>
+        <div class="pageHeader">
+            <h1 th:text="${title}"></h1>
+        </div>
 
         <form method="post" th:object="${item}">
 
-            <table>
+            <table class="homepage">
 
                 <tr>
 
                     <td><label for="name">Item:</label></td>
                     <td><input id="name" th:field="*{name}" /></td>
-                    <td class="errors" th:errors="*{name}"></td>
 
                 </tr>
+
+                <div class="errorsBlock">
+                    <div class="errors" th:errors="*{name}"></div>
+                    <div class="errors" th:errors="*{description}"></div>
+                </div>
 
                 <tr>
 
                     <td><label for="description">Description:</label></td>
                     <td><input id="description" th:field="*{description}" /></td>
-                    <td class="errors" th:errors="*{description}"></td>
 
                 </tr>
 
             </table>
 
-            <input type="submit" value="Add Item" /> |
-            <a href="/user">Cancel</a>
+            <div class="submitNav">
+                <input type="submit" value="Add Item" />
+                <a href="/user"><input type="button" value="Cancel" /></a>
+            </div>
 
         </form>
 

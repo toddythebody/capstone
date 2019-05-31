@@ -37,14 +37,14 @@ public class ItemController {
 
     @RequestMapping(value = "add", method = RequestMethod.GET)
     public String addDisplay(Model model, @ModelAttribute Item item) {
-        model.addAttribute("title", "Add an item to your registry");
+        model.addAttribute("title", "iWants");
         return "item/add";
     }
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public String addProcess(Model model, @ModelAttribute @Valid Item item, Errors errors) {
         if (errors.hasErrors()) {
-            model.addAttribute("title", "Add an item to your registry");
+            model.addAttribute("title", "iWants");
             return "item/add";
         }
         User user = userDao.findByName(Objects.requireNonNull(WebUtils.getCookie(request, "name")).getValue());
@@ -56,7 +56,7 @@ public class ItemController {
     @RequestMapping(value = "edit/{itemId}", method = RequestMethod.GET)
     public String editDisplay(Model model, @PathVariable int itemId) {
         Item item = itemDao.findById(itemId).get();
-        model.addAttribute("title", item.getName());
+        model.addAttribute("title", "iWants");
         model.addAttribute(item);
         return "item/edit";
     }
@@ -64,7 +64,7 @@ public class ItemController {
     @RequestMapping(value = "edit/{itemId}", method = RequestMethod.POST)
     public String editProcess(Model model, @PathVariable int itemId, @ModelAttribute @Valid Item item, Errors errors) {
         if (errors.hasErrors()) {
-            model.addAttribute("title", itemDao.findById(itemId).get().getName());
+            model.addAttribute("title", "iWants");
             return "item/edit";
         }
         Item newItem = itemDao.findById(itemId).get();
