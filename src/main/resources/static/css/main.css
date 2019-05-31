@@ -6,7 +6,7 @@
     background-repeat: no-repeat;
     height: 115px;
     border: 1px solid black;
-    width: 100%;
+    width: calc(100vw - 20px);
 }
 
 .pageHeader h1 {
@@ -27,7 +27,7 @@ nav {
     background-color: #f6f6f6;
     text-align: center;
     margin: 20vh auto 10px auto;
-    width: 95%;
+    width: 95vw;
     max-width: 800px;
     min-height: 350px;
     border: 1px solid black;
