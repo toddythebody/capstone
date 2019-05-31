@@ -3,30 +3,39 @@
     <head th:replace="fragments :: head"></head>
     <body>
 
-        <h1 th:text="${title}"></h1>
-
-        <div th:object="${user}">
-            <table>
-                <tr th:each="item : *{items}">
-                    <td th:text="${item.name}"></td>
-                    <td th:text="${item.description}"></td>
-                    <td th:if="${item.purchased} == false">
-                        <a th:href="'purchase/' + ${item.id}">
-                            <input class="red" type="button" />
-                        </a>
-                    </td>
-                    <td th:if="${item.purchased} == true">
-                        <a th:href="'purchase/' + ${item.id}">
-                            <input class="green" type="button" />
-                        </a>
-                    </td>
-                </tr>
-            </table>
+        <div class="pageHeader">
+            <h1 th:text="${title}"></h1>
         </div>
 
-        <a th:href="'add/' + ${user.name}">Follow</a> |
-        <a th:href="'remove/' + ${user.name}">Unfollow</a> |
-        <a href="/user/">Profile</a>
+        <nav>
+            <a th:href="'add/' + ${user.name}"><input type="button" value="Follow" /></a> |
+            <a th:href="'remove/' + ${user.name}"><input type="button" value="UnFollow" /></a> |
+            <a href="/user/"><input type="button" value="Profile" /></a> |
+            <a href="/user/friends"><input type="button" value="Following" /></a>
+        </nav>
+
+        <div th:object="${user}">
+            <table class="itemList">
+                <div th:each="item : *{items}">
+                    <tr class="itemListName">
+                        <td th:text="${item.name}" class="itemNameFriends"></td>
+                        <td th:if="${item.purchased} == false">
+                            <a th:href="'purchase/' + ${item.id}">
+                                <input class="red" type="button" value="Gift" />
+                            </a>
+                        </td>
+                        <td th:if="${item.purchased} == true">
+                            <a th:href="'purchase/' + ${item.id}">
+                                <input class="green" type="button" value="Gifted" />
+                            </a>
+                        </td>
+                    </tr>
+                    <tr class="itemListDesc">
+                        <td th:text="${item.description}"></td>
+                    </tr>
+                </div>
+            </table>
+        </div>
 
     </body>
 </html>

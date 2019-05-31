@@ -3,15 +3,24 @@
     <head th:replace="fragments :: head"></head>
     <body>
 
-        <h1 th:text="${title}"></h1>
+        <div class="pageHeader">
+            <h1 th:text="${title}"></h1>
+        </div>
 
-        <ul>
-            <div th:each="user : ${userList}">
-                <li><a th:href="'/user/' + ${user.name}" th:text="${user.name}"></a></li>
-            </div>
-        </ul>
+        <nav>
+            <form action="search" method="post">
+                <input type="text" name="search" />
+                <input type="submit" value="search" /> |
+                <a href="/user/"><input type="button" value="Profile" /></a> |
+                <a href="/user/friends"><input type="button" value="Following" /></a>
+            </form>
+        </nav>
 
-        <a href="/user/">Profile</a>
+        <table class="itemList">
+            <tr class="itemListFriends" th:each="user : ${userList}">
+                <td><a th:href="'/user/' + ${user.name}" th:text="${user.name}"></a></td>
+            </tr>
+        </table>
 
     </body>
 </html>
