@@ -6,6 +6,7 @@
     background-repeat: no-repeat;
     height: 115px;
     border: 1px solid black;
+    width: 100%;
 }
 
 .pageHeader h1 {
@@ -20,8 +21,8 @@
     display: block;
     background-color: #f6f6f6;
     text-align: center;
-    margin: 200px auto 10px auto;
-    height: 250px;
+    margin: 30vh auto 10px auto;
+    height: 35vh;
     width: 95%;
     max-width: 800px;
     border: 1px solid black;
