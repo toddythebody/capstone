@@ -94,6 +94,12 @@ a {
     margin-bottom: 10px;
 }
 
+.itemListFriends {
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+    margin-top: 30px;
+}
+
 .homepage td, .registerTable td {
     width: 100%;
 }

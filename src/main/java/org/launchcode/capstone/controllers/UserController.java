@@ -52,7 +52,7 @@ public class UserController {
     @RequestMapping(value = "/{name}")
     public String profile(Model model, @PathVariable String name) {
         User user = userDao.findByName(name);
-        model.addAttribute("title", name + "'s profile");
+        model.addAttribute("title", "iWants");
         model.addAttribute("name", name);
         model.addAttribute(user);
         return "user/friend";
@@ -74,16 +74,13 @@ public class UserController {
     @RequestMapping(value = "friends")
     public String friends(Model model) {
         User user = userDao.findByName(WebUtils.getCookie(request, "name").getValue());
-        model.addAttribute("title", "Following");
+        model.addAttribute("title", "iWants");
         model.addAttribute(user);
         return "user/friends";
     }
 
     @RequestMapping(value = "search")
     public String search(Model model, @RequestParam String search) {
-        if (search.equals("")) {
-            return "redirect:/user/friends";
-        }
         List<User> userList = new ArrayList<>();
         User logged_user = userDao.findByName(WebUtils.getCookie(request, "name").getValue());
         for (User user : userDao.findAll()) {
@@ -94,7 +91,7 @@ public class UserController {
             }
         }
         model.addAttribute(userList);
-        model.addAttribute("title", "Search: " + search);
+        model.addAttribute("title", "iWants");
         return "user/search";
     }
 

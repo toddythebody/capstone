@@ -3,20 +3,23 @@
     <head th:replace="fragments :: head"></head>
     <body>
 
-        <h1 th:text="${title}"></h1>
+        <div class="pageHeader">
+            <h1 th:text="${title}"></h1>
+        </div>
 
-        <form action="search" method="post">
-            <input type="text" name="search" />
-            <input type="submit" value="search" />
-        </form>
+        <nav>
+            <form action="search" method="post">
+                <input type="text" name="search" />
+                <input type="submit" value="search" /> |
+                <a href="/user/"><input type="button" value="Profile" /></a>
+            </form>
+        </nav>
 
-        <ul th:object="${user}">
-            <div th:each="friend : *{friends}">
-                <li><a th:href="'/user/' + ${friend.name}" th:text="${friend.name}"></a></li>
-            </div>
-        </ul>
-
-        <a href="/user/">Profile</a>
+        <table class="itemList" th:object="${user}">
+            <tr class="itemListFriends" th:each="friend : *{friends}">
+                <td><a th:href="'/user/' + ${friend.name}" th:text="${friend.name}"></a></td>
+            </tr>
+        </table>
 
     </body>
 </html>
