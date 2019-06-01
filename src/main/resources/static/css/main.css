@@ -7,6 +7,7 @@
     height: 115px;
     border: 1px solid black;
     width: calc(100vw - 20px);
+    min-width: 414px;
 }
 
 .pageHeader h1 {
@@ -29,6 +30,7 @@ nav {
     margin: 20vh auto 10px auto;
     width: 95vw;
     max-width: 800px;
+    min-width: 414px;
     min-height: 350px;
     border: 1px solid black;
 }
