@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body>
+
+<div class="pageHeader">
+    <h1 th:text="${title}"></h1>
+</div>
+
+<nav>
+    <form action="search" method="post">
+        <input type="text" name="search" />
+        <input type="submit" value="search" /> |
+        <a href="/user/"><input type="button" value="Profile" /></a> |
+        <a href="/user/friends"><input type="button" value="Following" /></a>
+    </form>
+</nav>
+
+<table class="itemList" th:object="${user}">
+    <tr class="itemListFriends" th:each="friend : *{friendOf}">
+        <td><a th:href="'/user/' + ${friend.name}" th:text="${friend.name}"></a></td>
+    </tr>
+</table>
+
+</body>
+</html>

@@ -79,6 +79,14 @@ public class UserController {
         return "user/friends";
     }
 
+    @RequestMapping(value = "friendOf")
+    public String friendOf(Model model) {
+        User user = userDao.findByName(WebUtils.getCookie(request, "name").getValue());
+        model.addAttribute("title", "iWants");
+        model.addAttribute(user);
+        return "user/followers";
+    }
+
     @RequestMapping(value = "search")
     public String search(Model model, @RequestParam String search) {
         List<User> userList = new ArrayList<>();
