@@ -19,7 +19,9 @@
             <table class="itemList">
                 <div th:each="item : *{items}">
                     <tr class="itemListName">
-                        <td th:text="${item.name}" class="itemNameFriends"></td>
+                        <td class="itemNameFriends">
+                            <a class="itemName" th:href="'https://www.google.com/search?q=' + ${item.name} + '+' + ${item.description}" th:text="${item.name}" target="_blank"></a>
+                        </td>
                         <td th:if="${item.purchased} == false">
                             <a th:href="'purchase/' + ${item.id}">
                                 <input class="red" type="button" value="Gift" />
