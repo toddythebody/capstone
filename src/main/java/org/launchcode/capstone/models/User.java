@@ -38,7 +38,7 @@ public class User {
     private List<User> friendOf = new ArrayList<>();
 
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "profile_id")
     private Profile profile;
 
     public User() { }
