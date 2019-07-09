@@ -15,21 +15,31 @@ public class User {
     @Id
     @GeneratedValue
     private int id;
+
     @NotNull
     @Pattern(regexp = "^[\\S]{5,30}$", message = "No spaces/5-30 characters")
     private String name;
+
     @Email
     private String email;
+
     @NotNull
     @Pattern(regexp = "^[\\S]{5,}$", message = "No spaces/5-30 characters")
     private String password;
+
     @OneToMany
     @JoinColumn(name = "user_id")
     private List<Item> items = new ArrayList<>();
+
     @ManyToMany
     private List<User> friends = new ArrayList<>();
+
     @ManyToMany(mappedBy = "friends")
     private List<User> friendOf = new ArrayList<>();
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private Profile profile;
 
     public User() { }
 
@@ -85,5 +95,9 @@ public class User {
 
     public void removeFriend(User friend) {
         friends.remove(friend);
+    }
+
+    public Profile getProfile() {
+        return profile;
     }
 }
