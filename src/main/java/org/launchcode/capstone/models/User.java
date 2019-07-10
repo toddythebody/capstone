@@ -37,8 +37,7 @@ public class User {
     @ManyToMany(mappedBy = "friends")
     private List<User> friendOf = new ArrayList<>();
 
-    @OneToOne
-    @JoinColumn(name = "profile_id")
+    @OneToOne(mappedBy = "user")
     private Profile profile;
 
     public User() { }

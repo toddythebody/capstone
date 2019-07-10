@@ -21,10 +21,11 @@
         </div>
 
         <div th:if="${profile} != null" th:object="${profile}">
-            <h1>test</h1>
+            <br><br><br>
+            <div th:text="*{about}"></div>
+            <img th:src="@{'data:image/jpg;base64, ' + ${pic}}" />
         </div>
     
-        <img th:src="@{../img/profile_pic/9.jpg}">
 
     </body>
 </html>

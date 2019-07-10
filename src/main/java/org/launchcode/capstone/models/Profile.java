@@ -1,10 +1,11 @@
 package org.launchcode.capstone.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.io.File;
+import java.nio.ByteOrder;
 
 @Entity
 public class Profile {
@@ -13,7 +14,8 @@ public class Profile {
     @GeneratedValue
     private int id;
 
-    private String pic_location;
+    @Lob
+    private byte[] pic;
 
     @Size(max = 1000, message = "1000 characters max")
     private String about;
@@ -23,8 +25,8 @@ public class Profile {
 
     public Profile() {}
 
-    public Profile(String pic_location, String about) {
-        this.pic_location = pic_location;
+    public Profile(byte[] pic, String about) {
+        this.pic = pic;
         this.about = about;
     }
 
@@ -32,12 +34,12 @@ public class Profile {
         return id;
     }
 
-    public String getPic_location() {
-        return pic_location;
+    public byte[] getPic() {
+        return pic;
     }
 
-    public void setPic_location(String pic_location) {
-        this.pic_location = pic_location;
+    public void setPic(byte[] pic) {
+        this.pic = pic;
     }
 
     public String getAbout() {

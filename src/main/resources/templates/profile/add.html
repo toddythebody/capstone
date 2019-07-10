@@ -16,8 +16,11 @@
 
         <div><br><br>
             <form method="post" enctype="multipart/form-data">
-                <input name="pic" type="file" value="Upload Image" accept="image/jpeg" />
+                <input name="file" type="file" />
+                <textarea th:field="${profile.about}"></textarea>
                 <input type="submit" />
+                <div th:errors="${profile.about}"></div>
+                <div th:errors="${profile.pic}"></div>
             </form>
         </div>
 
