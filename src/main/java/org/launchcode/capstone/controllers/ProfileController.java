@@ -47,7 +47,7 @@ public class ProfileController {
     public String index(Model model) throws IOException {
         String name = WebUtils.getCookie(request, "name").getValue();
         User user = userDao.findByName(name);
-        if (user.getProfile() != null && user.getProfile().getPic() != null && user.getProfile().getPic().length != 0) {
+        if (user.getProfile() != null && user.getProfile().getPic() != null) {
             String pic_base64 = new String(Base64.getEncoder().encode(user.getProfile().getPic()), "UTF-8");
             model.addAttribute("pic", pic_base64);
         }
@@ -72,9 +72,21 @@ public class ProfileController {
         }
         User user = userDao.findByName(WebUtils.getCookie(request, "name").getValue());
         profile.setUser(user);
-        byte[] pic = file.getBytes();
-        profile.setPic(pic);
+        if (!file.isEmpty()) {
+            byte[] pic = file.getBytes();
+            profile.setPic(pic);
+        }
         profileDao.save(profile);
         return "redirect:/profile";
+    }
+
+    @RequestMapping(value = "edit", method = RequestMethod.GET)
+    public String editDisplay(Model model) {
+        User user = userDao.findByName(WebUtils.getCookie(request, "name").getValue());
+        Profile profile = user.getProfile();
+
+        model.addAttribute("title", "iWants");
+        model.addAttribute(profile);
+        return "profile/edit";
     }
 }

@@ -22,8 +22,9 @@
 
         <div th:if="${profile} != null" th:object="${profile}">
             <br><br><br>
+            <img class="profile_pic" th:unless="${profile.pic} == null" th:src="@{'data:image/jpg;base64, ' + ${pic}}" />
+            <img class="profile_pic" th:if="${profile.pic} == null" src="../img/profile_pic/emptyPic.png" />
             <div th:text="*{about}"></div>
-            <img th:src="@{'data:image/jpg;base64, ' + ${pic}}" />
         </div>
     
 
