@@ -1,10 +1,32 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
-<head>
-    <meta charset="UTF-8"/>
-    <title></title>
-</head>
-<body>
+    <head th:replace="fragments :: head"></head>
+    <body>
 
-</body>
+        <div class="pageHeader">
+            <h1 th:text="${title}"></h1>
+        </div>
+
+        <nav>
+            <a href="/user/logout"><input type="button" value="Logout" /></a> |
+            <a href="/user/"><input type="button" value="iWants" /></a> |
+            <a href="/user/friends"><input type="button" value="Following" /></a> |
+            <a href="/user/friendOf"><input type="button" value="Followers" /></a>
+            <a href="/profile/add" th:if="${profile} == null"> | <input type="button" value="Add Profile" /></a>
+            <a href="/profile/edit" th:if="${profile} != null"> | <input type="button" value="Edit Profile" /></a>
+        </nav>
+
+        <div th:if="${profile} == null">
+            <h1>No Profile Yet</h1>
+        </div>
+
+        <div th:if="${profile} != null" th:object="${profile}">
+            <br><br><br>
+            <img class="profile_pic" th:unless="${profile.pic} == null" th:src="@{'data:image/jpg;base64, ' + ${pic}}" />
+            <img class="profile_pic" th:if="${profile.pic} == null" src="../img/profile_pic/emptyPic.png" />
+            <div th:text="*{about}"></div>
+        </div>
+
+
+    </body>
 </html>

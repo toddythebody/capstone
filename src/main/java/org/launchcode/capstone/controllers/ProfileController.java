@@ -20,10 +20,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Base64;
@@ -81,10 +78,13 @@ public class ProfileController {
     }
 
     @RequestMapping(value = "edit", method = RequestMethod.GET)
-    public String editDisplay(Model model) {
+    public String editDisplay(Model model) throws UnsupportedEncodingException {
         User user = userDao.findByName(WebUtils.getCookie(request, "name").getValue());
         Profile profile = user.getProfile();
-
+        if (profile.getPic() != null) {
+            String pic_base64 = new String(Base64.getEncoder().encode(profile.getPic()), "UTF-8");
+            model.addAttribute("pic", pic_base64);
+        }
         model.addAttribute("title", "iWants");
         model.addAttribute(profile);
         return "profile/edit";
